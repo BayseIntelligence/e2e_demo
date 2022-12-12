@@ -1,6 +1,7 @@
 import argparse
 import bayse_summary
 import config
+import interpret
 import knowledgebase as kb
 import sys
 import time
@@ -98,6 +99,13 @@ if __name__ == "__main__":
                         default="/tmp/bayseflows")
     parser.add_argument("-t", "--timing", help="capture diagnostics about timing of each step", action="store_true")
     parser.add_argument("--noupload", help="add this to avoid processing statistics in the cloud", action="store_true")
+    parser.add_argument("--interpret", help=f"a URL or destination that should be interpreted", type=str, default=None)
+    parser.add_argument("-s", "--screenshot", help=f"Should we capture a screenshot of the URL?",
+                        action='store_true', default=False)
+    parser.add_argument("-d", "--details", help=f"Should we capture the destination details that were found when "
+                                                f"visiting a URL?", action='store_true', default=False)
+    parser.add_argument("--url", help=f"The URL where an interpret result is stored."
+                        , type=str, default=None)
     args = parser.parse_args()
 
     if args.e2e:
@@ -107,4 +115,14 @@ if __name__ == "__main__":
             print(f"{args.e2e} is not a directory. Please supply a directory for this argument!")
         sys.exit()
     else:
-        print(f"Unrecognized arg...Cannot continue.")
+        if not args.url:
+            if not args.interpret:
+                parser.print_help()
+                sys.exit(1)
+            print(f"Sending {args.interpret} to be interpreted")
+            result = interpret.interpret_url(args.interpret, args.screenshot, args.details)
+            interpret.get_interpret_result(result)
+        else:
+            print(f"Ignoring all other args and interpreting passed in URL.")
+            interpret.get_interpret_result(args.url)
+

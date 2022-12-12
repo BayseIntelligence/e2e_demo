@@ -5,8 +5,8 @@ you need help getting Bayse set up in your production environment, please reach 
 ## Initial Setup
 This code will allow you to run an end-to-end demo with Bayse, but there are some prerequisites.
 
-1. First, to use the labeling functionality, you'll need to [register](https://www.bayse.io/register) and request an 
-API key. Once your API key is provisioned, you will need to reach out to `hello at bayse dot io` to request the labeling 
+1. First, to use the labeling or interpret site functionality, you'll need to [register](https://www.bayse.io/register) 
+   and request an API key. Once your API key is provisioned, you will need to reach out to `hello at bayse dot io` to request the labeling 
  functionality. This is a binary that will be compiled for your operating system type and architecture (i.e. `Ubuntu 
 Linux x64`, `Mac OS X M1`), so please include that information in your email. The team at Bayse will then provide you 
 with a binary.
@@ -26,7 +26,7 @@ API_KEY = "<YOUR API KEY GOES HERE>"
 
 At this point, you should be ready to demo the Bayse functionality!
 
-## Performing an End-to-End Demo
+## Performing an End-to-End (Labeling + Knowledge) Demo
 If you want to use your own input files, please place them in a directory that you can access via the script. You 
 can also use those provided in the `samples` directory for testing. The command below will show you how to use those.
 
@@ -40,7 +40,7 @@ The results will be stored in whichever output directory you specify (which defa
 provided).
 
 
-## Viewing the Results
+### Viewing the Results
 To look at the JSON data created by running the end-to-en demo, open the file in your viewer of choice. The 
 information contained in the files should capture:
 * when the activity first started (`trafficDate`)
@@ -148,10 +148,20 @@ For example, here is the output of one of the BayseFlows from a sample:
      }
 ```
 
-## Next Steps
+### Next Steps
 The information above is certainly useful, but it becomes infinitely more useful when it is pulled into your current 
 workflow! For example, below is Bayse's data pulled into the Elastic Stack and used for hunting:
 
 ![Hunting with Bayse Data](images/hunting.png)
+
+## Performing an Interpret Site Demo
+To run the demo, use the following command:
+`python3 demo.py --interpret  <URL or destination to interpret> --screenshot --details`
+
+This tells Bayse to interpret the URL or destination you've passed to it, take a screenshot, and return all of the 
+details about destinations that are seen when visiting the URL. For details on the kind of information that may be 
+returned by this endpoint, please refer to our [API Docs](https://documenter.getpostman.com/view/23795814/2s8YRpGWoi#724e0559-5496-4460-a01e-4f7a71d6713c). 
+
+## Getting Started
 
 If you'd like to get started with harnessing the full potential of Bayse, please reach out to `sales@bayse.io`!
