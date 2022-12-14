@@ -7,7 +7,7 @@ import time
 
 # Constants
 VALID_RESULT_TYPES = ["interpretation", "screenshot", "knowledge", "statistics", "partial_knowledge",
-                      "all_destination_details"]
+                      "all_destination_details", "iocs"]
 RESULTS_WITH_BINARY_DATA = ["screenshot"]
 TIME_DELAY_SECONDS = 10
 
